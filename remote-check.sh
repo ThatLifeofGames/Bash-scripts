@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 # Test rclone team drive remotes are still working
 #
