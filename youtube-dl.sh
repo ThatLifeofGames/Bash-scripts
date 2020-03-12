@@ -15,7 +15,6 @@ youtube-dl \
 --write-description \
 --write-thumbnail \
 --geo-bypass \
---cookies cookies.txt \
 -o "/home/personal/yt-dl/tmp/Archive/%(title)s-%(upload_date)s" \
 --exec 'rclone move /home/personal/yt-dl/tmp/ yt-dl:/ --progress --delete-empty-src-dirs --config /home/ubuntu/.config/rclone/rclone.conf && echo'
 
@@ -33,7 +32,6 @@ youtube-dl \
 --extract-audio \
 --audio-quality 0 \
 --geo-bypass \
---cookies cookies.txt \
 -o "/home/personal/yt-dl/tmp/Music/%(playlist_title)s/%(title)s.%(ext)s" \
 --exec 'rclone move /home/personal/yt-dl/tmp/ yt-dl:/ --progress --delete-empty-src-dirs --config /home/ubuntu/.config/rclone/rclone.conf && echo'
 
@@ -52,7 +50,6 @@ youtube-dl \
 --write-description \
 --write-thumbnail \
 --geo-bypass \
---cookies cookies.txt \
 -o "/home/personal/yt-dl/tmp/Playlists/%(playlist_title)s/%(title)s-%(uploader)s-%(upload_date)s.%(ext)s" \
 --exec 'rclone move /home/personal/yt-dl/tmp/ yt-dl:/ --progress --delete-empty-src-dirs --config /home/ubuntu/.config/rclone/rclone.conf && echo'
 
@@ -71,7 +68,6 @@ youtube-dl \
 --write-description \
 --write-thumbnail \
 --geo-bypass \
---cookies cookies.txt \
 -o "/home/personal/yt-dl/tmp/Channels/%(uploader)s/%(title)s-%(upload_date)s.%(ext)s" \
 --exec 'rclone move /home/personal/yt-dl/tmp/ yt-dl:/ --progress --delete-empty-src-dirs --config /home/ubuntu/.config/rclone/rclone.conf && echo'
 
