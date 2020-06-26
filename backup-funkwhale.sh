@@ -1,9 +1,9 @@
 #!/bin/bash
 
-##############################################################################################                                 
+##############################################################################################
 # Funkwhale database, music (sync) and configuration file backup                             #
 # Crontab entry:                                                                             #
-# 0 3 * * * flock -n /var/lock/funkwhaleBackup.lock -c 'sh /home/ubuntu/backup-funkwhale.sh' #
+# 0 2 * * * flock -n /var/lock/funkwhaleBackup.lock -c 'sh /home/ubuntu/backup-funkwhale.sh' #
 ##############################################################################################
 
 # Create directory and log to /dev/null in case it complains it exists
@@ -25,5 +25,5 @@ rclone sync /etc/nginx/sites-enabled/ vps-backups:/Funkwhale/Nginx --backup-dir 
 
 # Sync music/music artwork to vps backups remote keeping old versions in /Old folder
 
-rclone sync /srv/funkwhale/data/media vps-backups:/Funkwhale/media --backup-dir vps-backups:/Funkwhale/Old/Media/$(date +%G)/$(date +%m)/ --suffix $(date +"__%d_%H:%M:%S") --suffix-keep-extension --create-empty-src-dirs --drive-stop-on-upload-limit --config /root/.config/rclone/rclone.conf
-rclone sync /srv/funkwhale/data/music vps-backups:/Funkwhale/music --backup-dir vps-backups:/Funkwhale/Old/Music/$(date +%G)/$(date +%m)/ --suffix $(date +"__%d_%H:%M:%S") --suffix-keep-extension --create-empty-src-dirs --drive-stop-on-upload-limit --config /root/.config/rclone/rclone.conf
+rclone sync /srv/funkwhale/data/media vps-backups:/Funkwhale/media --backup-dir vps-backups:/Funkwhale/Old/Media/$(date +%G)/$(date +%m)/ --suffix $(date +"__%d_%H:%M:%S") --suffix-keep-extension --create-empty-src-dirs --drive-stop-on-upload-limit --config /root/.config/rclone/rclone.conf --transfers 8 
+rclone sync /srv/funkwhale/data/music vps-backups:/Funkwhale/music --backup-dir vps-backups:/Funkwhale/Old/Music/$(date +%G)/$(date +%m)/ --suffix $(date +"__%d_%H:%M:%S") --suffix-keep-extension --create-empty-src-dirs --drive-stop-on-upload-limit --config /root/.config/rclone/rclone.conf --transfers 8
