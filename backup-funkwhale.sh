@@ -3,7 +3,7 @@
 ##############################################################################################                                 
 # Funkwhale database, music (sync) and configuration file backup                             #
 # Crontab entry:                                                                             #
-# 0 2 * * * flock -n /var/lock/funkwhaleBackup.lock -c 'sh /home/ubuntu/backup-funkwhale.sh' #
+# 0 3 * * * flock -n /var/lock/funkwhaleBackup.lock -c 'sh /home/ubuntu/backup-funkwhale.sh' #
 ##############################################################################################
 
 # Create directory and log to /dev/null in case it complains it exists
