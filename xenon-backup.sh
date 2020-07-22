@@ -5,8 +5,6 @@
 # Requires tar and a configured rclone remote                                              #
 ############################################################################################
 
-# At the time of this commit, this script is UNTESTED
-
 # Create required DIRs, ignore messages about already existing
 /bin/mkdir /data/backup-tmp > /dev/null
 /bin/mkdir /data/backup-tmp/xenon > /dev/null
@@ -20,8 +18,8 @@
 /bin/tar cvzf - /data/backup-tmp/xenon/dump | /usr/bin/split --bytes=5GB - /data/backup-tmp/xenon/upload/backup.tar.gz.
 
 # Upload and overwrite old backup data
-/usr/bin/rclone delete xenon:/Xenon-MongoDB/$(date +%d) > /dev/null
-/usr/bin/rclone move /data/backup-tmp/xenon/upload xenon:/Xenon-MongoDB/$(date +%d) --drive-chunk-size 64M --bwlimit 75M > /dev/null # Transfer backup limited to 75MB/s as this server can be busy
+/usr/bin/rclone delete xenon:/Xenon-MongoDB/$(date +%d) --config /root/.config/rclone/rclone.conf > /dev/null
+/usr/bin/rclone move /data/backup-tmp/xenon/upload xenon:/Xenon-MongoDB/$(date +%d) --drive-chunk-size 64M --bwlimit 75M --config /root/.config/rclone/rclone.conf > /dev/null # Transfer backup limited to 75MB/s as this server can be busy
 
 # Cleanup
 
