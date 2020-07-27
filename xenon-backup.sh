@@ -14,8 +14,8 @@
 # Dump data to disk with lots of space, this may take a while
 /usr/bin/mongodump --out=/data/backup-tmp/xenon/dump
 
-# tar.gz data in to 5gb chunks, reattach to a single archive and extract with cat backup.tar.gz.* | tar xzvf - 
-/bin/tar cvzf - /data/backup-tmp/xenon/dump | /usr/bin/split --bytes=5GB - /data/backup-tmp/xenon/upload/backup.tar.gz.
+# tar.gz data
+/bin/tar -cvzf /data/backup-tmp/xenon/upload/backup.tar.gz /data/backup-tmp/xenon/dump
 
 # Upload and overwrite old backup data
 /usr/bin/rclone delete xenon:/Xenon-MongoDB/$(date +%d) --config /root/.config/rclone/rclone.conf > /dev/null
