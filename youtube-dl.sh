@@ -14,6 +14,7 @@ youtube-dl \
 --add-metadata \
 --write-description \
 --write-thumbnail \
+--write-info-json \
 --geo-bypass \   
 -o "/home/personal/yt-dl/tmp/Archive/%(title)s-%(upload_date)s" \
 --exec 'rclone move /home/personal/yt-dl/tmp/ yt-dl:/ --progress --delete-empty-src-dirs --config /root/.config/rclone/rclone.conf --progress --transfers 8 --drive-chunk-size 64M && echo'
@@ -32,6 +33,7 @@ youtube-dl \
 --add-metadata \
 --write-description \
 --write-thumbnail \
+--write-info-json \
 --geo-bypass \   
 -o "/home/personal/yt-dl/tmp/Playlists/%(playlist_title)s/%(title)s-%(uploader)s-%(upload_date)s.%(ext)s" \
 --exec 'rclone move /home/personal/yt-dl/tmp/ yt-dl:/ --progress --delete-empty-src-dirs --config /root/.config/rclone/rclone.conf --progress --transfers 8 --drive-chunk-size 64M && echo'
@@ -50,6 +52,7 @@ youtube-dl \
 --add-metadata \
 --write-description \
 --write-thumbnail \
+--write-info-json \
 --geo-bypass \
 -o "/home/personal/yt-dl/tmp/Channels/%(uploader)s/%(title)s-%(upload_date)s.%(ext)s" \
 --exec 'rclone move /home/personal/yt-dl/tmp/ yt-dl:/ --progress --delete-empty-src-dirs --config /root/.config/rclone/rclone.conf --progress --transfers 8 --drive-chunk-size 64M && echo'
