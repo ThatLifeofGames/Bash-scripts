@@ -19,7 +19,7 @@
 
 # Upload and overwrite old backup data
 /usr/bin/rclone delete xenon:/Xenon-MongoDB/$(date +%d) --drive-use-trash=false --config /root/.config/rclone/rclone.conf > /dev/null
-/usr/bin/rclone move /data/backup-tmp/xenon/upload xenon:/Xenon-MongoDB/$(date +%d) --drive-chunk-size 64M --bwlimit 75M --drive-use-trash=false --config /root/.config/rclone/rclone.conf > /dev/null # Transfer backup limited to 75MB/s as this server can be busy
+/usr/bin/rclone move /data/backup-tmp/xenon/upload xenon:/Xenon-MongoDB/$(date +%d) --drive-chunk-size 64M --bwlimit 90M --drive-use-trash=false --config /root/.config/rclone/rclone.conf > /dev/null # Transfer backup limited to 90MB/s as this server can be busy
 
 # Cleanup
 
