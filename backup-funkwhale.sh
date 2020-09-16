@@ -23,3 +23,5 @@ rclone sync /srv/funkwhale/config/.env vps-backups:/Hetzner/Funkwhale/Config --b
 
 rclone sync /srv/funkwhale/data/media vps-backups:/Hetzner/Funkwhale/media --backup-dir vps-backups:/Hetzner/Funkwhale/Old/Media/$(date +%G)/$(date +%m)/ --suffix $(date +"__%d_%H:%M:%S") --suffix-keep-extension --create-empty-src-dirs --drive-stop-on-upload-limit --config /root/.config/rclone/rclone.conf --transfers 8
 rclone sync /srv/funkwhale/data/music vps-backups:/Hetzner/Funkwhale/music --backup-dir vps-backups:/Hetzner/Funkwhale/Old/Music/$(date +%G)/$(date +%m)/ --suffix $(date +"__%d_%H:%M:%S") --suffix-keep-extension --create-empty-src-dirs --drive-stop-on-upload-limit --config /root/.config/rclone/rclone.conf --transfers 8
+
+rm -rf /tmp/funkwhale-backup/
