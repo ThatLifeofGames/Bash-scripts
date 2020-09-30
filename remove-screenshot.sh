@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-echo 'Which screenshot should be deleted?'
+echo "Which screenshot should be deleted?"
 
 read removeImg
 
