@@ -5,7 +5,6 @@ rm -rf /home/personal/yt-dl/tmp/*
 # Manual (individual videos) archival
 
 youtube-dl \
---dateafter 20050101 \
 --download-archive ./downloaded-manual.txt \
 --batch-file ./manual.txt \
 --no-overwrites \
@@ -24,7 +23,6 @@ echo 'Finished manual, moving to playlists...'
 # Playlists
 
 youtube-dl \
---dateafter 20050101 \
 --download-archive ./downloaded-playlists.txt \
 --batch-file ./playlists.txt \
 --no-overwrites \
@@ -43,7 +41,6 @@ echo 'Finished playlists, moving to channels...'
 # Channels
 
 youtube-dl \
---dateafter 20050101 \
 --download-archive ./downloaded-channels.txt \
 --batch-file ./channels.txt \
 --no-overwrites \
