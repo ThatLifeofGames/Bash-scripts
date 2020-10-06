@@ -12,7 +12,6 @@ echo [SCRIPT LOG] Starting backup script at $(date) >> /root/backup.log
  --transfers 8 \
  --create-empty-src-dirs \
  --retries 50 \
- --size-only \
  --config /root/.config/rclone/rclone.conf \
  --backup-dir gbackup:/Old/???/$(date +%G)/$(date +%m)/ \
  --suffix $(date +"__%d_%H:%M:%S") \
