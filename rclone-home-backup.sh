@@ -17,7 +17,6 @@ echo [SCRIPT LOG] Starting backup script at $(date) >> /root/backup.log
  --backup-dir gbackup:/Old/???/$(date +%G)/$(date +%m)/ \
  --suffix $(date +"__%d_%H:%M:%S") \
  --suffix-keep-extension \
- --size-only \
  --retries-sleep 30s >> /root/backup.log
 
 echo [SCRIPT LOG] Finished syncing ??? folder at $(date) >> /root/backup.log
