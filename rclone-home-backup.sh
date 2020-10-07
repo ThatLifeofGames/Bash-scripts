@@ -15,6 +15,7 @@ echo [SCRIPT LOG] Starting backup script at $(date) >> /root/backup.log
  --config /root/.config/rclone/rclone.conf \
  --backup-dir gbackup:/Old/???/$(date +%G)/$(date +%m)/ \
  --suffix $(date +"__%d_%H:%M:%S") \
+ --size-only \
  --suffix-keep-extension \
  --retries-sleep 30s >> /root/backup.log
 
