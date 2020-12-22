@@ -1,26 +1,14 @@
 #!/bin/bash
 ############################################################################################
 # Creates a database backup of mongodb (for xenon), and sends the data to an rclone remote #
-# Backups are kept for 30 days, older backups are deleted then overwritten                 #
-# Requires tar and a configured rclone remote                                              #
+# Backups are kept for 30 days, older backups are deleted                                  #
+# Requires MongoDump, rclone remote and credentials added                                  #
 ############################################################################################
 
-# Create required DIRs, ignore messages about already existing
-/bin/mkdir /data/backup-tmp > /dev/null
-/bin/mkdir /data/backup-tmp/xenon > /dev/null
-/bin/mkdir /data/backup-tmp/xenon/dump > /dev/null
-/bin/mkdir /data/backup-tmp/xenon/upload > /dev/null
+# Delete old data
 
-# Dump data to disk with lots of space, this may take a while
-/usr/bin/mongodump --out=/data/backup-tmp/xenon/dump
+/usr/bin/rclone delete xenon:/Xenon-MongoDB/$(date +%d) --drive-use-trash=false --config /root/.config/rclone/rclone.conf >/dev/null 2>&1
 
-# tar.gz data
-/bin/tar -cvzf /data/backup-tmp/xenon/upload/backup.tar.gz /data/backup-tmp/xenon/dump
+# Dump and upload data via stdout and gzip + archive while uploading
 
-# Upload and overwrite old backup data
-/usr/bin/rclone delete xenon:/Xenon-MongoDB/$(date +%d) --drive-use-trash=false --config /root/.config/rclone/rclone.conf > /dev/null
-/usr/bin/rclone move /data/backup-tmp/xenon/upload xenon:/Xenon-MongoDB/$(date +%d) --drive-chunk-size 64M --bwlimit 90M --drive-use-trash=false --config /root/.config/rclone/rclone.conf > /dev/null # Transfer backup limited to 90MB/s as this server can be busy
-
-# Cleanup
-
-/bin/rm -rf /data/backup-tmp/xenon/*
+/usr/bin/mongodump --archive --gzip --host 10.0.0.2 --port 27017 | /usr/bin/rclone rcat xenon:/Xenon-MongoDB/$(date +%d)/Dump.archive --drive-chunk-size 64M --bwlimit 30M --drive-use-trash=false --config /root/.config/rclone/rclone.conf >/dev/null 2>&1
