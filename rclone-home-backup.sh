@@ -1,8 +1,10 @@
 #!/bin/bash
  # SOME FOLDER NAMES ARE REMOVED FOR GITHUB!
-########################################
-# Backup script to google drive account#
-######################################## 
+#########################################
+# Backup script to google drive account #
+######################################### 
+
+echo [SCRIPT LOG] Starting backup script at $(date) >> /root/backup.log
 
 echo [SCRIPT LOG] Starting backup script at $(date) >> /root/backup.log
 
@@ -15,9 +17,11 @@ echo [SCRIPT LOG] Starting backup script at $(date) >> /root/backup.log
  --config /root/.config/rclone/rclone.conf \
  --backup-dir gbackup:/Old/???/$(date +%G)/$(date +%m)/ \
  --suffix $(date +"__%d_%H:%M:%S") \
- --size-only \
  --suffix-keep-extension \
- --retries-sleep 30s >> /root/backup.log
+ --size-only \
+ --retries-sleep 30s \
+ --tpslimit-burst 50 \
+ --progress
 
 echo [SCRIPT LOG] Finished syncing ??? folder at $(date) >> /root/backup.log
 
@@ -30,9 +34,10 @@ echo [SCRIPT LOG] Finished syncing ??? folder at $(date) >> /root/backup.log
  --config /root/.config/rclone/rclone.conf \
  --backup-dir gbackup:/Old/???/$(date +%G)/$(date +%m)/ \
  --suffix $(date +"__%d_%H:%M:%S") \
- --suffix-keep-extension \ 
- --retries-sleep 30s \
+ --suffix-keep-extension \
  --size-only \
- --progress >> /root/backup.log 
+ --retries-sleep 30s \
+ --tpslimit-burst 50 \
+ --progress
 
 echo [SCRIPT LOG] Finished syncing ??? at $(date). Done, exiting. >> /root/backup.log
